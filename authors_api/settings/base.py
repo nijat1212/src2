@@ -71,17 +71,17 @@ WSGI_APPLICATION = "authors_api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": "mydatabase",
     }
-}
+}"""
 
-"""DATABASES = {
+DATABASES = {
     "default": env.db("DATABASE_URL")
 }
-"""
+
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -138,3 +138,25 @@ MEDIA_ROOT = str(ROOT_DIR / "mediafiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_URLS_REGEX = r"^api/.*$" 
+
+LOGGING = {
+    "version" : 1,
+    "disable_existing_loggers" : False, 
+    "formatters" : {
+        "verbose" :{
+            "format" : "%(levelname)s %(name)-12s %(asctime)s %(module)s "
+            "%(process)d %(thread)d %(message)s"
+        }
+    },
+    "handlers"  : {
+        "console" : {
+            "level" : "DEBUG",
+            "class" : "logging.StreamHandler",
+            "formatter" : "verbose"
+        }
+    },
+    "root" : {
+        "level" : "INFO", 
+        "handlers" : ["console"],
+    }
+}
